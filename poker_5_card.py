@@ -91,10 +91,10 @@ class Player:
 
     def of_straight(self):
         if self.hand[-5][0] > 5:
-            if self.hand[-5][0] - 1 == self.hand[-4][0] and \
-             self.hand[-5][0] - 2 == self.hand[-3][0] and \
-             self.hand[-5][0] - 3 == self.hand[-2][0] and \
-             self.hand[-5][0] - 4 == self.hand[-1][0]:
+            if self.hand[-5][0] - 1 == self.hand[-4][0]\
+                    and self.hand[-5][0] - 2 == self.hand[-3][0]\
+                    and self.hand[-5][0] - 3 == self.hand[-2][0]\
+                    and self.hand[-5][0] - 4 == self.hand[-1][0]:
                 self.straight.append(self.hand[-1])
                 self.straight.append(self.hand[-2])
                 self.straight.append(self.hand[-3])
