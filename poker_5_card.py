@@ -1,4 +1,4 @@
-# New Poker game - 5 card study
+# Poker game - 5 card stud
 
 from random import shuffle
 from copy import deepcopy
@@ -11,13 +11,13 @@ class Deck:
     def __init__(self):
         self.cards = []
 
-    def build_deck(self, num_decks = 1):
+    def build_deck(self, num_decks=1):
         for n in range(num_decks):
             for c in self.card_list:
                 for s in self.suit_list:
                     if c is not None:
                         self.cards.append([self.card_list.index(c), c, s])
-            shuffle(self.cards)
+        shuffle(self.cards)
 
 
 class Player:
@@ -327,38 +327,6 @@ def play_game():
         p1.deal_card()
         p2.deal_card()
 
-    #cheat High Card
-    # p1.hand = [[14, 'Ace', 'Diamonds'], [13, 'King', 'Hearts'], [12, '10', 'Spades'], [4, '4', 'Hearts'], [2, '2', 'Spades']]
-    # p2.hand = [[14, 'Ace', 'Diamonds'], [13, 'King', 'Spades'], [12, 'Queen', 'Spades'], [4, '4', 'Hearts'], [3, '3', 'Spades']]
-
-    #cheat 2 kind
-    # p1.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [13, 'King', 'Spades'], [4, '4', 'Hearts'], [3, '3', 'Spades']]
-    # p2.hand = [[13, 'King', 'Diamonds'], [13, 'King', 'Hearts'], [12, 'Queen', 'Spades'], [11, 'Jack', 'Hearts'], [3, '3', 'Clubs']]
-
-    #cheat 2 pair
-    # p1.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [13, 'King', 'Spades'], [13, 'Queen', 'Spades'], [3, '3', 'Spades']]
-    # p2.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [13, 'King', 'Spades'], [13, 'Queen', 'Spades'], [2, '2', 'Spades']]
-
-    #cheat 3 kind
-    #p1.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [14, 'Ace', 'Spades'], [4, '4', 'Hearts'], [3, '3', 'Spades']]
-    #p2.hand = [[11, 'Jack', 'Diamonds'], [11, 'Jack', 'Hearts'], [11, 'Jack', 'Spades'], [9, '9', 'Spades'], [2, '2', 'Spades']]
-
-    # cheat 4 kind
-    #p1.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [14, 'Ace', 'Spades'], [14, 'Ace', 'Clubs'], [3, '3', 'Spades']]
-    #p2.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [14, 'Ace', 'Spades'], [14, 'Ace', 'Clubs'], [2, '2', 'Spades']]
-
-    #cheat full house
-    #p1.hand = [[14, 'King', 'Diamonds'], [14, 'King', 'Hearts'], [14, 'King', 'Spades'], [5, '4', 'Hearts'], [5, '4', 'Spades']]
-    #p2.hand = [[14, 'Ace', 'Diamonds'], [14, 'Ace', 'Hearts'], [14, 'Ace', 'Spades'], [4, '4', 'Hearts'], [4, '4', 'Spades']]
-
-    #cheat straight
-    #p1.hand = [[13, 'Ace', 'Diamonds'], [12, 'King', 'Hearts'], [11, 'Queen', 'Spades'], [10, 'Jack', 'Hearts'], [9, '10', 'Spades']]
-    #p2.hand = [[14, 'Ace', 'Diamonds'], [13, 'King', 'Hearts'], [12, 'Queen', 'Spades'], [11, 'Jack', 'Hearts'], [10, '10', 'Spades']]
-
-    #cheat royal straight flush
-    #p1.hand = [[14, 'Ace', 'Diamonds'], [13, 'King', 'Diamonds'], [12, 'Queen', 'Diamonds'], [11, 'Jack', 'Diamonds'], [10, '10', 'Diamonds']]
-    #p2.hand = [[13, 'Ace', 'Diamonds'], [12, 'King', 'Diamonds'], [10, 'Queen', 'Diamonds'], [9, 'Jack', 'Diamonds'], [8, '10', 'Diamonds']]
-
     # sort cards
     p1.sort_cards()
     p2.sort_cards()
@@ -399,7 +367,8 @@ def play_game():
 
     decide_winner()
 
-for i in range(10):
+
+for i in range(1):
 
     # initialize the deck
     deck = Deck()
