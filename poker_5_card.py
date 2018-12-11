@@ -37,7 +37,7 @@ class Player:
         self.four_kind = []
         self.straight_flush = []
         self.royal_straight_flush = []
-    
+
     def deal_card(self):
         card = deck.cards.pop()
         self.hand.append(card)
@@ -47,7 +47,8 @@ class Player:
 
     def of_kind_4(self):
         for i in range(2):
-            if self.hand[i][0] == self.hand[i+1][0] and self.hand[i][0] == self.hand[i+2][0] and self.hand[i][0] == self.hand[i+3][0]:
+            if self.hand[i][0] == self.hand[i+1][0] and self.hand[i][0] == self.hand[i+2][0]\
+                    and self.hand[i][0] == self.hand[i+3][0]:
                 self.four_kind.append(self.hand[i])
                 self.four_kind.append(self.hand[i + 1])
                 self.four_kind.append(self.hand[i + 2])
@@ -70,13 +71,15 @@ class Player:
                 if self.pair_1 == [] and self.hand[i][0] == self.hand[i+1][0]:
                     self.pair_1.append(self.hand[i])
                     self.pair_1.append(self.hand[i+1])
-                elif self.pair_1 != [] and self.hand[i][0] != self.pair_1[0][0] and self.hand[i][0] == self.hand[i+1][0]:
+                elif self.pair_1 != [] and self.hand[i][0] != self.pair_1[0][0]\
+                        and self.hand[i][0] == self.hand[i+1][0]:
                     self.pair_2.append(self.hand[i])
                     self.pair_2.append(self.hand[i+1])
             return
         else:  # checks for 1 pair
             for i in range(4):
-                if self.pair_1 == [] and self.hand[i][0] == self.hand[i+1][0] and self.hand[i][0] != self.three_kind[0][0]:
+                if self.pair_1 == [] and self.hand[i][0] == self.hand[i+1][0]\
+                        and self.hand[i][0] != self.three_kind[0][0]:
                     self.pair_1.append(self.hand[i])
                     self.pair_1.append(self.hand[i+1])
 
@@ -206,21 +209,24 @@ def decide_winner():
         print("Player 2 wins with", p2.best_play_name)
     else:
         print("Tie Breaker!!!")
-        if p1.best_play == 100 and p2.best_play == 100: # royal straight flush
+
+        if p1.best_play == 100 and p2.best_play == 100:  # royal straight flush
             if p1.straight[0][0] > p2.straight[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.straight[0][0] < p2.straight[0][0]:
                 print("Player 2 wins with", p2.best_play_name)
             else:
                 print("Tie Game - Split the Pot")
-        if p1.best_play == 90 and p2.best_play == 90: # straight flush
+
+        if p1.best_play == 90 and p2.best_play == 90:  # straight flush
             if p1.straight[0][0] > p2.straight[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.straight[0][0] < p2.straight[0][0]:
                 print("Player 2 wins with", p2.best_play_name)
             else:
                 print("Tie Game - Split the Pot")
-        if p1.best_play == 80 and p2.best_play == 80: # four of a kind
+
+        if p1.best_play == 80 and p2.best_play == 80:  # four of a kind
             if p1.four_kind[0][0] > p2.four_kind[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.four_kind[0][0] < p2.four_kind[0][0]:
@@ -232,7 +238,8 @@ def decide_winner():
                     print("Player 2 wins with", p2.best_play_name, "and High Card tie breaker")
                 else:
                     print("Tie Game - Split the Pot")
-        if p1.best_play == 70 and p2.best_play == 70: # full house
+
+        if p1.best_play == 70 and p2.best_play == 70:  # full house
             if p1.three_kind[0][0] > p2.three_kind[0][0]:
                 print("Player 1 wins with", p1.best_play_name, "and highest 3 of a kind")
             elif p1.three_kind[0][0] < p2.three_kind[0][0]:
@@ -244,7 +251,8 @@ def decide_winner():
                     print("Player 2 wins with", p2.best_play_name, "and highest pair")
                 else:
                     print("Tie Game - Split the Pot")
-        if p1.best_play == 60 and p2.best_play == 60: # flush
+
+        if p1.best_play == 60 and p2.best_play == 60:  # flush
             if p1.flush[0][0] > p2.flush[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.flush[0][0] < p2.flush[0][0]:
@@ -252,7 +260,7 @@ def decide_winner():
             else:
                 print("Tie Game - Split the Pot")
 
-        if p1.best_play == 50 and p2.best_play == 50: # straight
+        if p1.best_play == 50 and p2.best_play == 50:  # straight
             if p1.straight[0][0] > p2.straight[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.straight[0][0] < p2.straight[0][0]:
@@ -260,7 +268,7 @@ def decide_winner():
             else:
                 print("Tie Game - Split the Pot")
 
-        if p1.best_play == 40 and p2.best_play == 40: # three of a kind
+        if p1.best_play == 40 and p2.best_play == 40:  # three of a kind
             if p1.three_kind[0][0] > p2.three_kind[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.three_kind[0][0] < p2.three_kind[0][0]:
@@ -292,7 +300,7 @@ def decide_winner():
             else:
                 print("Tie Game - Split the Pot")
 
-        if p1.best_play == 20 and p2.best_play == 20: # one pair
+        if p1.best_play == 20 and p2.best_play == 20:  # one pair
             if p1.pair_1[0][0] > p2.pair_1[0][0]:
                 print("Player 1 wins with", p1.best_play_name)
             elif p1.pair_1[0][0] < p2.pair_1[0][0]:
@@ -308,7 +316,7 @@ def decide_winner():
             else:
                 print("Tie Game - Split the Pot")
 
-        if p1.best_play == 10 and p2.best_play == 10: # high card
+        if p1.best_play == 10 and p2.best_play == 10:  # high card
             for i in range(5):
                     if p1.high_cards[i][0] > p2.high_cards[i][0]:
                         print("Player 1 wins with", p1.best_play_name, p1.high_cards[i])
@@ -368,7 +376,9 @@ def play_game():
     decide_winner()
 
 
-for i in range(1):
+number_of_games = range(1)
+
+for games in number_of_games:
 
     # initialize the deck
     deck = Deck()
