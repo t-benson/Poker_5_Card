@@ -13,10 +13,8 @@ class Deck:
 
     def build_deck(self, num_decks=1):
         for n in range(num_decks):
-            for c in self.card_list:
-                for s in self.suit_list:
-                    if c is not None:
-                        self.cards.append([self.card_list.index(c), c, s])
+            self.cards += [[self.card_list.index(c), c, s] for c in self.card_list for s in self.suit_list
+                           if c is not None]
         shuffle(self.cards)
 
 
@@ -70,7 +68,7 @@ class Player:
     def of_kind_2(self):
         if not self.four_kind:
             return
-        elif not self.three_kind:  # checks for 2 pair
+        elif not self.three_kind:  # checks for up to two pair
             for i in range(4):
                 if self.pair_1 == [] and self.hand[i][0] == self.hand[i+1][0]:
                     self.pair_1.append(self.hand[i])
@@ -80,7 +78,7 @@ class Player:
                     self.pair_2.append(self.hand[i])
                     self.pair_2.append(self.hand[i+1])
             return
-        else:  # checks for 1 pair
+        else:  # checks for only one pair
             for i in range(4):
                 if self.pair_1 == [] and self.hand[i][0] == self.hand[i+1][0]\
                         and self.hand[i][0] != self.three_kind[0][0]:
@@ -197,7 +195,53 @@ class Player:
             pass  # all high cards will be evaluated
 
 
-# decide winner
+class ScoreBoard:
+    def __init__(self):
+        pass
+
+
+def deal_cards():
+    for i in range(Player.num_cards_dealt):
+        p1.deal_card()
+        p2.deal_card()
+
+    p1.sort_cards()
+    p2.sort_cards()
+
+
+def calculate_score():  # calculate each players best play
+    p1.of_kind_4()
+    p1.of_kind_3()
+    p1.of_kind_2()
+    p1.of_two_pair()
+    p1.of_full_house()
+    p1.of_straight()
+    p1.of_flush()
+    p1.of_straight_flush()
+    p1.of_royal_straight_flush()
+    p1.of_high_cards()
+    p1.of_best_play()
+
+    p2.of_kind_4()
+    p2.of_kind_3()
+    p2.of_kind_2()
+    p2.of_two_pair()
+    p2.of_full_house()
+    p2.of_straight()
+    p2.of_flush()
+    p2.of_straight_flush()
+    p2.of_royal_straight_flush()
+    p2.of_high_cards()
+    p2.of_best_play()
+
+    # Testing
+
+    print("P1 Hand:", p1.hand)
+    print("P2 Hand:", p2.hand)
+
+    print("P1 Best Play:", p1.best_play_name)
+    print("P2 Best Play:", p2.best_play_name)
+
 
 def decide_winner():
     if p1.best_play > p2.best_play:
@@ -325,67 +369,23 @@ def decide_winner():
                 print("Tie Game - Split the Pot")
 
 
-def play_game():
-
-    # deal cards to players
-    for i in range(Player.num_cards_dealt):
-        p1.deal_card()
-        p2.deal_card()
-
-    # sort cards
-    p1.sort_cards()
-    p2.sort_cards()
-
-    # calculate players highest score
-
-    p1.of_kind_4()
-    p1.of_kind_3()
-    p1.of_kind_2()
-    p1.of_two_pair()
-    p1.of_full_house()
-    p1.of_straight()
-    p1.of_flush()
-    p1.of_straight_flush()
-    p1.of_royal_straight_flush()
-    p1.of_high_cards()
-    p1.of_best_play()
-
-    p2.of_kind_4()
-    p2.of_kind_3()
-    p2.of_kind_2()
-    p2.of_two_pair()
-    p2.of_full_house()
-    p2.of_straight()
-    p2.of_flush()
-    p2.of_straight_flush()
-    p2.of_royal_straight_flush()
-    p2.of_high_cards()
-    p2.of_best_play()
-
-    # Testing
-
-    print("P1 Hand:", p1.hand)
-    print("P2 Hand:", p2.hand)
-
-    print("P1 Best Play:", p1.best_play_name)
-    print("P2 Best Play:", p2.best_play_name)
-
-    decide_winner()
-
-
 number_of_games = range(1)
-
 for games in number_of_games:
 
     # initialize the deck
     deck = Deck()
-    deck.build_deck()
+    deck.build_deck(num_decks=4)
 
     # initialize players
     p1 = Player()
     p2 = Player()
 
-    play_game()
+    # initialize scoreboard
+    scoreboard = ScoreBoard()
+
+    deal_cards()
+    calculate_score()
+    decide_winner()
 
     with open("log.txt", "a") as log:
         log.write(p1.best_play_name)
