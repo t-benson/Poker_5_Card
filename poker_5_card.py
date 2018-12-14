@@ -37,6 +37,10 @@ class Player:
         self.four_kind = []
         self.straight_flush = []
         self.royal_straight_flush = []
+        self.suit_check = None
+        self.suit_count = None
+        self.best_play = None
+        self.best_play_name = None
 
     def deal_card(self):
         card = deck.cards.pop()
@@ -55,7 +59,7 @@ class Player:
                 self.four_kind.append(self.hand[i + 3])
 
     def of_kind_3(self):
-        if self.four_kind == []:
+        if not self.four_kind:
             for i in range(3):
                 if self.hand[i][0] == self.hand[i+1][0] and self.hand[i][0] == self.hand[i+2][0]:
                     self.three_kind.append(self.hand[i])
@@ -64,9 +68,9 @@ class Player:
                     return
 
     def of_kind_2(self):
-        if self.four_kind != []:
+        if not self.four_kind:
             return
-        elif self.three_kind == []:  # checks for 2 pair
+        elif not self.three_kind:  # checks for 2 pair
             for i in range(4):
                 if self.pair_1 == [] and self.hand[i][0] == self.hand[i+1][0]:
                     self.pair_1.append(self.hand[i])
@@ -83,12 +87,6 @@ class Player:
                     self.pair_1.append(self.hand[i])
                     self.pair_1.append(self.hand[i+1])
 
-    def of_pair_1(self):
-        pass
-
-    def of_pair_2(self):
-        pass
-
     def of_straight(self):
         if self.hand[-5][0] > 5:
             if self.hand[-5][0] - 1 == self.hand[-4][0]\
@@ -103,11 +101,11 @@ class Player:
 
     def of_flush(self):
         self.suit_check = self.hand[0][2]
-        self.count = 0
+        self.suit_count = 0
         for i in self.hand:
             if i[2] == self.suit_check:
-                self.count += 1
-        if self.count == 5:
+                self.suit_count += 1
+        if self.suit_count == 5:
             self.flush = self.hand
 
     def of_straight_flush(self):
@@ -134,32 +132,31 @@ class Player:
             self.two_pair.append(self.pair_2[1])
 
     def of_best_play(self):
-
-        if self.royal_straight_flush != []:
+        if self.royal_straight_flush:
             self.best_play = 100
             self.best_play_name = "a Royal Straight Flush"
-        elif self.straight_flush != []:
+        elif self.straight_flush:
             self.best_play = 90
             self.best_play_name = "a Straight Flush"
-        elif self.four_kind != []:
+        elif self.four_kind:
             self.best_play = 80
             self.best_play_name = "Four of a Kind"
-        elif self.full_house != []:
+        elif self.full_house:
             self.best_play = 70
             self.best_play_name = "a Full House"
-        elif self.flush != []:
+        elif self.flush:
             self.best_play = 60
             self.best_play_name = "a Flush"
-        elif self.straight != []:
+        elif self.straight:
             self.best_play = 50
             self.best_play_name = "a Straight"
-        elif self.three_kind != []:
+        elif self.three_kind:
             self.best_play = 40
             self.best_play_name = "3 of a Kind"
-        elif self.two_pair != []:
+        elif self.two_pair:
             self.best_play = 30
             self.best_play_name = "2 Pair"
-        elif self.pair_1 != []:
+        elif self.pair_1:
             self.best_play = 20
             self.best_play_name = "1 Pair"
         else:
@@ -169,31 +166,31 @@ class Player:
     def of_high_cards(self):
         self.high_cards = deepcopy(self.hand)
 
-        if self.royal_straight_flush != []:
+        if self.royal_straight_flush:
             for item in self.royal_straight_flush:
                 self.high_cards.remove(item)
-        elif self.straight_flush != []:
+        elif self.straight_flush:
             for item in self.straight_flush:
                 self.high_cards.remove(item)
-        elif self.four_kind != []:
+        elif self.four_kind:
             for item in self.four_kind:
                 self.high_cards.remove(item)
-        elif self.full_house != []:
+        elif self.full_house:
             for item in self.full_house:
                 self.high_cards.remove(item)
-        elif self.flush != []:
+        elif self.flush:
             for item in self.flush:
                 self.high_cards.remove(item)
-        elif self.straight != []:
+        elif self.straight:
             for item in self.straight:
                 self.high_cards.remove(item)
-        elif self.three_kind != []:
+        elif self.three_kind:
             for item in self.three_kind:
                 self.high_cards.remove(item)
-        elif self.two_pair != []:
+        elif self.two_pair:
             for item in self.two_pair:
                 self.high_cards.remove(item)
-        elif self.pair_1 != []:
+        elif self.pair_1:
             for item in self.pair_1:
                 self.high_cards.remove(item)
         else:
